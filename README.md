@@ -1,16 +1,16 @@
 
 ## users テーブル
 
-| Column           | Type   | Options     |
-| ---------------- | ------ | ----------- |
-| nickname         | string | null: false |
-| email            | string | null: false |
-| password         | string | null: false |
-| first_name       | string | null: false |
-| family_name      | string | null: false |
-| first_name_kana  | string | null: false |
-| family_name_kana | string | null: false |
-| birthday         | date   | null: false |
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| encrypted_password | string | null: false |
+| first_name         | string | null: false |
+| family_name        | string | null: false |
+| first_name_kana    | string | null: false |
+| family_name_kana   | string | null: false |
+| birthday           | date   | null: false |
 
 ### Association
 
@@ -29,7 +29,7 @@
 | prefecture_id       | integer    | null: false                    |
 | preparation_days_id | integer    | null: false                    |
 | price               | integer    | null: false                    |
-| user_id             | references | null: false, foreign_key: true |
+| user                | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -40,8 +40,8 @@
 
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
-| item_id | references | null: false, foreign_key: true |
-| user_id | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -51,16 +51,16 @@
 
 ## addresses テーブル
 
-| Column        | Type    | Options     |
-| ------------- | ------- | ----------- |
-| postal_code   | string  | null: false |
-| prefecture_id | integer | null: false |
-| city          | string  | null: false |
-| house_number  | string  | null: false |
-| building      | string  |             |
-| telephone     | string  | null: false |
-| purchase_id   | string  | null: false |
+| Column        | Type       | Options                       |
+| ------------- | ---------- | ----------------------------- |
+| postal_code   | string     | null: false                   |
+| prefecture_id | integer    | null: false                   |
+| city          | string     | null: false                   |
+| house_number  | string     | null: false                   |
+| building      | string     |                               |
+| telephone     | string     | null: false                   |
+| purchase      | references | null: false ,foreign_key: true|
 
 ### Association
 
-- belongs_to :purchases
+- belongs_to :purchase
