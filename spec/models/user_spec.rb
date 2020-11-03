@@ -83,10 +83,15 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name can't be blank")
       end
-      it 'ユーザー本名は、全角（漢字・ひらがな・カタカナ）でないと登録できない' do
+      it 'ユーザー本名の名字は、全角（漢字・ひらがな・カタカナ）でないと登録できない' do
         @user.family_name = 'Yamada'
         @user.valid?
         expect(@user.errors.full_messages).to include('Family name には全角（漢字・ひらがな・カタカナ）のみが使えます')
+      end
+      it 'ユーザー本名の名前は、全角（漢字・ひらがな・カタカナ）でないと登録できない' do
+        @user.first_name = 'Taro'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('First name には全角（漢字・ひらがな・カタカナ）のみが使えます')
       end
       it 'ユーザー本名のフリガナは、名字が未入力だと登録できない' do
         @user.family_name_kana = ''
@@ -98,8 +103,13 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("First name kana can't be blank")
       end
-      it 'ユーザー本名のフリガナは、全角（カタカナ）でないと登録できない' do
-        @user.first_name_kana = 'Taro'
+      it 'ユーザー本名の名字のフリガナは、全角（カタカナ）でないと登録できない' do
+        @user.family_name_kana = 'ﾔﾏﾀﾞ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Family name kana には全角（カタカナ）のみが使えます')
+      end
+      it 'ユーザー本名の名前のフリガナは、全角（カタカナ）でないと登録できない' do
+        @user.first_name_kana = 'ﾀﾛｳ'
         @user.valid?
         expect(@user.errors.full_messages).to include('First name kana には全角（カタカナ）のみが使えます')
       end
