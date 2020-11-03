@@ -71,13 +71,6 @@ RSpec.describe User, type: :model do
   end
 
   describe '新規登録/本人情報確認' do
-    # ↓上記『describe '新規登録/ユーザー情報' do』で確認済み
-    # context '新規登録がうまくいくとき' do
-    #   it "すべての要素が正しく入力されている" do
-    #     expect(@user).to be_valid
-    #   end
-    # end
-
     context '新規登録がうまくいかないとき' do
       it 'ユーザー本名は、名字が未入力だと登録できない' do
         @user.family_name = ''
