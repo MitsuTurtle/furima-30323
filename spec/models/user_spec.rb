@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
   describe '新規登録/ユーザー情報' do
     context '新規登録がうまくいくとき' do
-      it 'すべての要素が正しく入力されている' do
+      it 'すべての要素が正しく入力されていると登録できる' do
         expect(@user).to be_valid
       end
     end
@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Email has already been taken')
       end
-      it 'メールアドレスに@が含まれないと登録できない' do
+      it 'メールアドレスに@が含まれていないと登録できない' do
         @user.email = 'test55gmail.com'
         @user.valid?
         expect(@user.errors.full_messages).to include('Email is invalid')
@@ -45,7 +45,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
-      it 'パスワードが半角英数字混合ででないと登録できない' do
+      it 'パスワードが半角英数字混合でないと登録できない' do
         @user.password = '000000'
         @user.password_confirmation = '000000'
         @user.valid?
@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
       end
-      it 'パスワードとパスワード（確認用）、値が不一致だと登録できない' do
+      it 'パスワードと確認用パスワードの値が不一致だと登録できない' do
         @user.password_confirmation = ("#{Faker::Internet.password(min_length: 4)}2a")
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
