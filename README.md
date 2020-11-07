@@ -6,10 +6,10 @@
 | nickname           | string | null: false |
 | email              | string | null: false |
 | encrypted_password | string | null: false |
-| first_name         | string | null: false |
 | family_name        | string | null: false |
-| first_name_kana    | string | null: false |
+| first_name         | string | null: false |
 | family_name_kana   | string | null: false |
+| first_name_kana    | string | null: false |
 | birthday           | date   | null: false |
 
 ### Association
@@ -27,7 +27,7 @@
 | condition_id        | integer    | null: false                    |
 | postage_payer_id    | integer    | null: false                    |
 | prefecture_id       | integer    | null: false                    |
-| preparation_days_id | integer    | null: false                    |
+| shipping_time_id | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
 
