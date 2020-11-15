@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all
-
     if current_user.id == @item.user_id || @orders.exists?(item_id: @item.id)
       redirect_to root_path
     end
