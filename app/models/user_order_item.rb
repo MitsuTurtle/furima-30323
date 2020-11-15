@@ -10,6 +10,7 @@ class UserOrderItem
     validates :city
     validates :house_number
     validates :telephone, length: {maximum: 11}, format: { with: /\A[0-9]+\z/}
+    validates :price
     validates :token
   end
 
