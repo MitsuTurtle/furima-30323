@@ -1,7 +1,7 @@
 class UserOrderItem
   include ActiveModel::Model
   attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :house_number,
-  :building, :telephone
+  :building, :telephone, :token, :price
 
   # バリデーション
   with_options presence:true do
@@ -10,6 +10,7 @@ class UserOrderItem
     validates :city
     validates :house_number
     validates :telephone, length: {maximum: 11}
+    validates :token
   end
 
   def save
