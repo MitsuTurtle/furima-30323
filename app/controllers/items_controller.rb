@@ -1,7 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_action :order_all, only: [:index, :show, :edit]
 
   def index
     @items = Item.order('created_at DESC')
@@ -24,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if user_signed_in? && @orders.exists?(item_id: @item.id) == false
+    if user_signed_in? && @item.order.present? == false
       if current_user.id == @item.user_id
         render :edit
       else
@@ -62,9 +61,5 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
-  end
-
-  def order_all
-    @orders = Order.all
   end
 end
