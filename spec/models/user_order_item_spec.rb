@@ -3,20 +3,26 @@ require 'rails_helper'
 RSpec.describe UserOrderItem, type: :model do
   describe '購入情報の保存' do
     before do
-      @user = FactoryBot.build(:user)
-      @item = FactoryBot.build(:item)
-      @user_order_item = FactoryBot.build(:user_order_item)
-      @user_order_item.user_id = @user.id
-      @user_order_item.item_id = @item.id
+      seller = FactoryBot.create(:user)
+      buyer = FactoryBot.create(:user)
+      @item = FactoryBot.create(:item, user_id: seller.id)
+      # @item.image = fixture_file_upload('/test_image.jpeg')
+      # @item.save
+      @user_order_item = FactoryBot.build(:user_order_item, user_id: buyer.id, item_id: @item.id)
     end
 
     it 'すべての値が正しく入力されていれば保存できること' do
       expect(@user_order_item).to be_valid
     end
-    it 'priceが空では登録できないこと' do
-      @user_order_item.price = nil
+    it 'user_idが空では登録できないこと' do
+      @user_order_item.user_id = nil
       @user_order_item.valid?
-      expect(@user_order_item.errors.full_messages).to include("Price can't be blank")
+      expect(@user_order_item.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが空では登録できないこと' do
+      @user_order_item.item_id = nil
+      @user_order_item.valid?
+      expect(@user_order_item.errors.full_messages).to include("Item can't be blank")
     end
     it 'tokenが空では登録できないこと' do
       @user_order_item.token = nil
