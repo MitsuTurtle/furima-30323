@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if user_signed_in?
+    if user_signed_in? && @item.order.present? == false
       if current_user.id == @item.user_id
         render :edit
       else
