@@ -17,10 +17,6 @@ RSpec.describe UserOrderItem, type: :model do
         @user_order_item.building = nil
         expect(@user_order_item).to be_valid
       end
-      it '電話番号が10桁だと保存できること' do
-        @user_order_item.telephone = '0901234567'
-        expect(@user_order_item).to be_valid
-      end
     end
 
     context '購入情報が保存できない場合' do
